@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>测试开放平台</title>
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="style/style.css" media="screen" type="text/css" />
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="style/default.css" />
+    <link rel="stylesheet" type="text/css" href="style/component.css" />
+    <script src="js/modernizr.custom.js"></script>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<div class="container">
+    <header class="clearfix">
+        <span>HTTPMOCK</span>
+    </header>
+    <ul class="cbp-vimenu">
+        <li><a href="http://10.152.4.26:8080/testplatform/html/indexPage.html" class="icon-logo">HOME</a></li>
+        <li><a href="http://10.152.4.26:8080/httpmock/html/indexPage.html#" target="_self" class="icon-archive" >HTTPMOCK</a></li>
+        <li><a href="http://10.152.4.26:8080/dubbomock/html/indexPage.html#" target="_self" class="icon-briefcase">DUBBOMOCK</a></li>
+        <li><a href="http://10.152.4.26:8080/httptest/html/indexPage.html#" target="_self" class="icon-pencil">HTTPTEST</a></li>
+        <li><a href="http://10.152.4.26:8080/websitescan/html/indexPage.html#" target="_self" class="icon-search">WEBSITESCAN</a></li>
+    </ul>
+</div>
+
+    <style>
+        body{ text-align:start}
+        .div{ margin:0 auto; width:850px; height:55px; border:1px solid #FFFFFF}
+    </style>
+
+    <form name="form1">
+        <div class="div">
+            <td style="width:15%;text-align:center;"><b>部门&nbsp;&nbsp;</b></td>
+            <select name="department" id="department" style="width:250px" onchange="changeSelect1(this.selectedIndex)" class="inline-select"></select>
+            <td style="width:15%;text-align:center;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+
+            <td style="width:15%;text-align:center;"><b>姓名&nbsp;&nbsp;</b></td>
+            <select name="name" id="name" style="width:250px" class="inline-select"></select>
+            <span class="modular fr"><a  class="pt-link-btn" a href="createAuthor.html" target="blank">+新增人员</a></span>
+        </div>
+
+        <td style="width:15%;text-align:center;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+
+        <div class="div">
+            <td style="width:15%;text-align:center;"><b>系统&nbsp;&nbsp;</b></td>
+            <select name="server" id="server" style="width:250px" onchange="changeSelect2(this.selectedIndex)" class="inline-select"></select>
+            <td style="width:15%;text-align:center;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+
+            <td style="width:15%;text-align:center;"><b>接口&nbsp;&nbsp;</b></td>
+            <select name="API" id="API" style="width:250px" class="inline-select"></select>
+            <span class="modular fr"><a  class="pt-link-btn" a href="createAPI.html" target="blank">+新增接口</a></span>
+        </div>
+
+        <style>
+            body{ text-align:center}
+            .div1{ margin:0 auto; width:200px; height:35px; border:1px solid #FFFFFF}
+        </style>
+
+        <div class="div1">
+            <input type="button" value="查询" onclick="searchSubmit()" class="tdBtn searchBtn"/>
+            <span class="modular fr"><a  class="pt-link-btn" onclick="creatDetail()">+新增mock</a></span>
+        </div>
+    </form>
+
+    <table class="list-style Interlaced" border="1" bgcolor="#E6E6FA" id="myTable">
+        <thread>
+            <tr>
+                <th>系统id</th>
+                <th>创建者</th>
+                <th>mock类型</th>
+                <th>mock场景</th>
+                <th>mock返回码</th>
+                <th>mock超时时间(ms)</th>
+                <th>mock生效条件</th>
+                <th>操作</th>
+            </tr>
+        </thread>
+        <tbody id='listBody' bgcolor="#F8F8F8">
+
+        </tbody>
+    </table>
+    <!-- BatchOperation -->
+    <div style="overflow:hidden;">
+        <!-- Operation -->
+        <div class="BatchOperation fl">
+            <input type="checkbox" id="del"/>
+            <label for="del" class="btnStyle middle">全选</label>
+            <input type="button" value="批量删除" class="btnStyle"/>
+        </div>
+        <!-- turn page -->
+        <div class="turnPage center fr">
+            <a>第一页</a>
+            <a>1</a>
+            <a>最后一页</a>
+        </div>
+    </div>
+</div>
+<style>
+    *{
+        margin:0;padding: 0;font-size: 14px;
+    }
+    .pop{
+        position: fixed;
+        display: none;
+        border-radius: 10px;
+        background-color: #fff;
+        z-index: 200;
+        width:600px;
+        height:600px;
+        border:1px solid #CACACA;
+        font:1rem "微软雅黑";
+    }
+    .pop .title{
+        width:600px;
+        height:550px;
+        line-height: 40px;
+        text-align: center;
+        border-bottom:1px solid #CACACA;
+    }
+    .pop .btn{
+        text-align: center;
+        width: 100%;
+        height: 120px;
+        line-height: 40px;
+        float:center;
+        color: #2B8AFB;
+    }
+    #btn-right{
+        border-right:1px solid #CACACA;
+    }
+</style>
+<div id="container"></div>
+
+
+<script src="js/public.js"></script>
+<script src="js/select.js"></script>
+<script src="js/index.js"></script>
+<script src="js/pop.js"></script>
+<script src="js/edit.js"></script>
+</body>
+</html>

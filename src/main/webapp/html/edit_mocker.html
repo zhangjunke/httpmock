@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>修改mock信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="edit_user"></i><em>修改mock信息</em></span>
+  </div>
+  <div id="inputList">  </div>
+  <table class="list-style">
+
+
+   <tr>
+    <td style="width:15%;text-align:right;">系统id：</td>
+    <td><input type="text" style="width:500px" class="textBox length-middle" id ="id2" /></td>
+   </tr>
+   <tr>
+    <td style="width:15%;text-align:right;">mock场景：</td>
+    <td><input type="text" style="width:500px" class="textBox length-middle" id ="mockCaseName2" /></td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">mock返回码：</td>
+    <td><input id ="mockCodeName2"  class="textBox length-middle" style="width:500px" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">mock超时时间(ms)：</td>
+    <td><input id ="mockTimeout2" class="textBox length-middle"  style="width:500px" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
+   </tr>
+     <tr>
+    <td style="text-align:right;">mock返回值：</td>
+    <td><textarea name="text" style="width:500px; height:300px;" class="textBox length-middle" id="mockMsg2" ></textarea></td>
+   </tr>
+<!--     <tr>
+    <td style="text-align:right;">mock生效条件：</td>
+    <td><input type="text" class="textBox length-middle" id ="mockMsg2" /></td>
+   </tr>
+   -->
+
+   <script language="javascript" type="text/javascript">
+       var loc = location.search;
+       var loc1=decodeURI(loc.replace("?",""));
+       var locArray=loc1.split("&amp;");
+       var n1 = locArray[0].length;//地址的总长度mockCaseName="余额不足投资理财失败"&amp;mockCode="200"&amp;mockTime="500"&amp;mockMsg=%7B"code":"0001","msg":"余额不足"%7D&amp;id=6
+       var n2 = locArray[0].indexOf("=");//取得=号的位置
+       var mockCaseName2 = locArray[0].substr(n2+2, n1-1).replace("\"","");//从=号后面的内容
+
+       var n3 = locArray[1].length;//地址的总长度
+       var n4 = locArray[1].indexOf("=");//取得=号的位置
+       var mockCodeName2 = locArray[1].substr(n4+2, n3-1).replace("\"","");//从=号后面的内容
+
+       var n5 = locArray[2].length;//地址的总长度
+       var n6 = locArray[2].indexOf("=");//取得=号的位置
+       var mockTimeout2 = locArray[2].substr(n6+2, n5-1).replace("\"","");//从=号后面的内容
+
+       var n7 = locArray[3].length;//地址的总长度
+       var n8 = locArray[3].indexOf("=");//取得=号的位置
+       var mockMsg2 = locArray[3].substr(n8+1, n7-1);//从=号后面的内容
+
+       var n9 = locArray[4].length;//地址的总长度
+       var n10 = locArray[4].indexOf("=");//取得=号的位置
+       var id2 = locArray[4].substr(n10+1, n9-1);//从=号后面的内容
+
+
+       $("#mockCaseName2").val(mockCaseName2);
+       $("#mockCodeName2").val(mockCodeName2);
+       $("#mockTimeout2").val(mockTimeout2);
+       $("#mockMsg2").val(mockMsg2);
+       $("#id2").val(id2);
+
+   </script>
+
+   <tr>
+    <td style="text-align:right;"></td>
+    <td><input type="submit" class="tdBtn" value="提交" onclick="modifySubmit(id2)"/></td>
+   </tr>
+  </table>
+ </div>
+
+
+ <script src="js/edit.js"></script>
+</body>
+</html>

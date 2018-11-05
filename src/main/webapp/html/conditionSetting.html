@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>设置mock条件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="edit_user"></i><em>设置mock条件</em></span>
+  </div>
+  <div id="inputList">  </div>
+     <style>
+         body{ text-align:center}
+         .div1{ margin:0 auto; width:200px; height:35px; border:1px solid #FFFFFF}
+     </style>
+
+  <table class="list-style" border="1" bgcolor="#E6E6FA">
+      <thread>
+          <tr>
+              <th>条件ID</th>
+              <th>条件明细</th>
+              <th>操作</th>
+      </thread>
+      <tbody id='conlistBody' bgcolor="#F8F8F8">
+
+      </tbody>
+      <script language="javascript" type="text/javascript">
+          var listBody=document.getElementById('conlistBody');
+
+          var loc = location.search;
+          var loc1=loc.replace("?","");
+          var locArray=loc1.split("&amp;");
+          var detailId=locArray[0].split(":")[1];
+          var conIdList=new Map([]);
+          var conSList=new Map([]);
+          for(var i=0;i<locArray.length-2;i++){
+              var conId=locArray[i+1].split(":")[0].replace("\'","");
+              var conS=locArray[i+1].split(":")[1].replace("\'","");
+              conIdList.set(JSON.stringify(i),conId);
+              conSList.set(JSON.stringify(i),conS);
+              var tr=document.createElement('tr');
+              var conId1=document.createElement('td');
+              var conS1=document.createElement('td');
+              var option=document.createElement('td');
+              var conShtml="<input type=\"text\" class=\"textBox length-middle\" id='"+JSON.stringify(i)+"' value='"+conS+"' />";
+              conId1.innerHTML=conId;
+              conS1.innerHTML=conShtml;
+              option.innerHTML="<td class=\"center\">" +
+                  "<input type=\"button\" onclick=\"modifyCondition(conIdList,'"+JSON.stringify(i)+"')\" id=\"save'"+i+"'\" value=\"保存\" class=\"tdBtn modifyBtn\"> "+
+                  " <input type=\"button\"  onclick=\"deleteCondition(conIdList,'"+JSON.stringify(i)+"')\" value=\"删除\" id=\"del'"+i+"'\"class=\"tdDelBtn\">" +
+                  " </td>";
+
+              tr.appendChild(conId1);
+              tr.appendChild(conS1);
+              tr.appendChild(option);
+              listBody.appendChild(tr);
+          }
+          </script>
+      <div class="div1">
+          <input type="button" value="+新增" onclick="newConditionPage(detailId)"  class="pt-link-btn"/>
+      </div>
+  </table>
+ </div>
+ <script src="js/edit.js"></script>
+
+</body>
+</html>

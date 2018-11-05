@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>新增mock信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="style/adminStyle.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div class="page-title">
+        <span class="modular fl"><i class="edit_user"></i><em>新增mock信息</em></span>
+    </div>
+
+
+
+    <table class="list-style">
+        <tr>
+            <td style="width:15%;text-align:right;">mock场景：</td>
+            <td><input type="text" style="width:500px" class="textBox length-middle" placeholder="e.g:测试投资成功" id ="mockCaseName"  /></td>
+        </tr>
+       <tr>
+            <td style="text-align:right;">mock返回码：</td>
+           <td><input id ="mockCodeName"  class="textBox length-middle" style="width:500px" onkeyup="this.value=this.value.replace(/\D/g,'')"  placeholder="e.g:200"  onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
+       </tr>
+        <tr>
+            <td style="text-align:right;">mock超时时间(ms)：</td>
+            <td><input id ="mockTimeout" class="textBox length-middle"  style="width:500px" onkeyup="this.value=this.value.replace(/\D/g,'')"  placeholder="代表多少毫秒后返回结果。e.g:1000." onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
+        </tr>
+             <tr>
+                <td style="text-align:right;">mock返回值：</td>
+                <td><textarea name="text" style="width:500px; height:300px;" class="textBox length-middle" placeholder="Json格式字符串" id="mockResponseMsg" ></textarea></td>
+            </tr>
+
+
+
+<!--        <script language="javascript" type="text/javascript">
+            var mockCaseName=document.getElementById('"+mockCaseName+"').value;
+            var mockCodeName=document.getElementById('"+mockCodeName+"').value;
+            var mockTimeout=document.getElementById('"+mockTimeout+"').value;
+            var mockCondition=document.getElementById('"+mockCondition+"').value;
+        </script>-->
+        <tr>
+            <td style="text-align:right;"></td>
+            <td><input type="submit" class="tdBtn" value="提交" onclick="createDetailSubmit()"/></td>
+        </tr>
+    </table>
+</div>
+
+<script src="js/edit.js"></script>
+</body>
+</html>

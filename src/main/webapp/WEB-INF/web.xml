@@ -1,0 +1,126 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+
+<display-name>httpmock</display-name>
+
+  <servlet>
+    <servlet-name>MockerServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.MockerServlet</servlet-class>
+    <init-param>
+      <param-name>log4jpath</param-name>
+      <!--引自若未指定，则使用工程目录，若指定，使用指定目录&ndash;&gt;-->
+      <param-value>/Logs</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MockerServlet</servlet-name>
+    <url-pattern>/mocking/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>IndexPageServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.IndexPageServlet</servlet-class>
+
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IndexPageServlet</servlet-name>
+    <url-pattern>/mocker/index/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SelectOptionServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.SelectOptionServlet</servlet-class>
+
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectOptionServlet</servlet-name>
+    <url-pattern>/mocker/selectOption/*</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>MockDetailSearchServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.MockDetailSearchServlet</servlet-class>
+
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MockDetailSearchServlet</servlet-name>
+    <url-pattern>/mocker/MockDetailSearch</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ModifySubmitServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.ModifySubmitServlet</servlet-class>
+
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifySubmitServlet</servlet-name>
+    <url-pattern>/mocker/ModifySubmit</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>MockDetailDeleteServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.MockDetailDeleteServlet</servlet-class>
+
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MockDetailDeleteServlet</servlet-name>
+    <url-pattern>/mocker/DeleteDetail</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MockConditionSearchServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.MockConditionSearchServlet</servlet-class>
+
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MockConditionSearchServlet</servlet-name>
+    <url-pattern>/mocker/MockConditionSearch</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MockConditionSettingServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.MockConditionSettingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MockConditionSettingServlet</servlet-name>
+    <url-pattern>/mocker/MockConditionSetting/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MockDetailCreateServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.MockDetailCreateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MockDetailCreateServlet</servlet-name>
+    <url-pattern>/mocker/MockDetailCreate</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MockAPICreateServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.MockAPICreateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MockAPICreateServlet</servlet-name>
+    <url-pattern>/mocker/MockAPICreate</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>MockAuthorCreateServlet</servlet-name>
+    <servlet-class>com.junker.httpmock.servlet.MockAuthorCreateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MockAuthorCreateServlet</servlet-name>
+    <url-pattern>/mocker/MockAuthorCreate</url-pattern>
+  </servlet-mapping>
+
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>/Properties/log4j.properties</param-value>
+  </context-param>
+
+</web-app>
