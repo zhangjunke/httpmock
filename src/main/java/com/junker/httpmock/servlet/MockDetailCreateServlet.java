@@ -29,7 +29,7 @@ public class MockDetailCreateServlet extends HttpServlet {
         String mockAPI=request.getParameter("mockAPI");
         String name=request.getParameter("name");
 
-        int result=jfc.checkFormat_Json(mockResponseMsg);
+        int result=jfc.checkFormat_JsonOrForm(mockResponseMsg);
         if(result!=0){
             createResult="1";
         }else {

@@ -28,7 +28,7 @@ public class ModifySubmitServlet extends HttpServlet {
         System.out.println("modifySubmit_time:"+time);
         System.out.println("modifySubmit_msg:"+msg);
         JsonFormatCheck jfc=new JsonFormatCheck();
-        int result=jfc.checkFormat_Json(msg);
+        int result=jfc.checkFormat_JsonOrForm(msg);
         SearchMockConfDAO smf =new SearchMockConfDAO();
         String modifyResult="";
         if(result!=0){
