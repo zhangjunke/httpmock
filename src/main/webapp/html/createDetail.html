@@ -27,6 +27,10 @@
             <td style="text-align:right;">mock超时时间(ms)：</td>
             <td><input id ="mockTimeout" class="textBox length-middle"  style="width:500px" onkeyup="this.value=this.value.replace(/\D/g,'')"  placeholder="代表多少毫秒后返回结果。e.g:1000." onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
         </tr>
+        <tr>
+            <td style="text-align:right;">mock返回Header：</td>
+            <td><textarea name="text" style="width:500px; height:300px;" class="textBox length-middle" placeholder="Json格式字符串。e.g:{&quot;Content-Type&quot;:&quot;application/json;charset=UTF-8&quot;,&quot;Set-Cookie&quot;:&quot;JSESSIONID=aa31ab81a6c24104aa70790f043b1413; Domain=.yqxiu.cn; Path=/; Max-Age=604800; Expires=Wed, 09-Jan-2019 02:28:41 GMT&quot;}" id="mockResponseHeader" ></textarea></td>
+        </tr>
              <tr>
                 <td style="text-align:right;">mock返回值：</td>
                 <td><textarea name="text" style="width:500px; height:300px;" class="textBox length-middle" placeholder="Json格式字符串" id="mockResponseMsg" ></textarea></td>

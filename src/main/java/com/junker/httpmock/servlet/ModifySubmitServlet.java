@@ -21,21 +21,24 @@ public class ModifySubmitServlet extends HttpServlet {
         String code=request.getParameter("code");
         String time=request.getParameter("time");
         String msg=request.getParameter("msg");
+        String header=request.getParameter("header");
         //String condition=request.getParameter("condition");
         System.out.println("modifySubmit_detailid:"+detailid);
         System.out.println("modifySubmit_caseName:"+caseName);
         System.out.println("modifySubmit_code:"+code);
         System.out.println("modifySubmit_time:"+time);
         System.out.println("modifySubmit_msg:"+msg);
+        System.out.println("modifySubmit_header:"+header);
         JsonFormatCheck jfc=new JsonFormatCheck();
-        int result=jfc.checkFormat_JsonOrForm(msg);
+        int result1=jfc.checkFormat_Json(msg);
+        int result2=jfc.checkFormat_Json(header);
         SearchMockConfDAO smf =new SearchMockConfDAO();
         String modifyResult="";
-        if(result!=0){
+        if(result1!=0||result2!=0){
             modifyResult="1";
         }else {
             try {
-                smf.mockDetailUpdate("返回值", caseName, time, code, msg, detailid);
+                smf.mockDetailUpdate("返回值", caseName, time, code, msg, header,detailid);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

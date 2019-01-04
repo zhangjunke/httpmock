@@ -162,7 +162,7 @@
             <url>http://localhost:8080/manager/text</url>
             <server>tomcat7</server>
             <username>admin</username>
-            <password>tomcat</password>
+            <password>admin</password>
             <port>8080</port>
             <path>/httpmock</path>
           </configuration>

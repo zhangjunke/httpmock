@@ -26,10 +26,11 @@ public class MockDetailCreateServlet extends HttpServlet {
         String mock_timeout=request.getParameter("mock_timeout");
         String mockCode=request.getParameter("mockCode");
         String mockResponseMsg=request.getParameter("mockResponseMsg");
+        String mockResponseHeader=request.getParameter("mockResponseHeader");
         String mockAPI=request.getParameter("mockAPI");
         String name=request.getParameter("name");
 
-        int result=jfc.checkFormat_JsonOrForm(mockResponseMsg);
+        int result=jfc.checkFormat_Json(mockResponseMsg);
         if(result!=0){
             createResult="1";
         }else {
@@ -37,7 +38,7 @@ public class MockDetailCreateServlet extends HttpServlet {
             try {
                 String APIId=smf.mockAPIidSearch(mockAPI);
                 String nameId=smf.useridSearch(name);
-                smf.mockDetailCreate(APIId,mockType,mockCaseName,mock_timeout,mockCode,mockResponseMsg,nameId);
+                smf.mockDetailCreate(APIId,mockType,mockCaseName,mock_timeout,mockCode,mockResponseMsg,mockResponseHeader,nameId);
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {

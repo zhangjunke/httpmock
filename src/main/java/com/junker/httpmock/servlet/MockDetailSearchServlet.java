@@ -61,6 +61,7 @@ public class MockDetailSearchServlet extends HttpServlet {
                 String mock_timeout="";
                 String mockCode="";
                 String mockResponseMsg="";
+                String mockResponseHeader="";
                 String eachAPIString="";
                 for(int j=0;j<apicount;j++){
                     id=mockAPI.get("id");
@@ -70,6 +71,7 @@ public class MockDetailSearchServlet extends HttpServlet {
                     mock_timeout=mockAPI.get("mock_timeout");
                     mockCode=mockAPI.get("mockCode");
                     mockResponseMsg=mockAPI.get("mockResponseMsg");
+                    mockResponseHeader=mockAPI.get("mockResponseHeader");
                     smcd.mockConditionSearch(id);
                     HashMap<String,String> conditions =mdd.conditions;
                     String conditionString="";
@@ -82,7 +84,7 @@ public class MockDetailSearchServlet extends HttpServlet {
                         // 此时的String类型的key就是我们需要的获取的值
                     }
                     eachAPIString="{\"id\":\""+id+"\",\"author\":\""+author+"\","+"\"mockType\":\""+mockType+"\","+"\"mockCaseName\":\""+mockCaseName+"\","+"\"mock_timeout\":\""+mock_timeout+"\","+
-                            "\"mockCode\":\""+mockCode+"\","+"\"mockCondition\":\""+conditionString+"\","+"\"mockResponseMsg\":"+mockResponseMsg+"}";
+                            "\"mockCode\":\""+mockCode+"\","+"\"mockCondition\":\""+conditionString+"\","+"\"mockResponseMsg\":"+mockResponseMsg+","+"\"mockResponseHeader\":"+mockResponseHeader+"}";
                 }
                 jsonString+=eachAPIString+",";
             }

@@ -31,6 +31,10 @@
     <td style="text-align:right;">mock超时时间(ms)：</td>
     <td><input id ="mockTimeout2" class="textBox length-middle"  style="width:500px" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
    </tr>
+   <tr>
+    <td style="text-align:right;">mock返回Header：</td>
+    <td><textarea name="text" style="width:500px; height:300px;" class="textBox length-middle" id="mockHeader2" ></textarea></td>
+   </tr>
      <tr>
     <td style="text-align:right;">mock返回值：</td>
     <td><textarea name="text" style="width:500px; height:300px;" class="textBox length-middle" id="mockMsg2" ></textarea></td>
@@ -45,7 +49,7 @@
        var loc = location.search;
        var loc1=decodeURI(loc.replace("?",""));
        var locArray=loc1.split("&amp;");
-       var n1 = locArray[0].length;//地址的总长度mockCaseName="余额不足投资理财失败"&amp;mockCode="200"&amp;mockTime="500"&amp;mockMsg=%7B"code":"0001","msg":"余额不足"%7D&amp;id=6
+       var n1 = locArray[0].length;//地址的总长度mockCaseName="余额不足投资理财失败"&amp;mockCode="200"&amp;mockTime="500"&amp;mockMsg=%7B"code":"0001","msg":"余额不足"%7D&amp;mockHeader=%7B"set-Cookie":"0001"%7B&amp;id=6
        var n2 = locArray[0].indexOf("=");//取得=号的位置
        var mockCaseName2 = locArray[0].substr(n2+2, n1-1).replace("\"","");//从=号后面的内容
 
@@ -63,13 +67,18 @@
 
        var n9 = locArray[4].length;//地址的总长度
        var n10 = locArray[4].indexOf("=");//取得=号的位置
-       var id2 = locArray[4].substr(n10+1, n9-1);//从=号后面的内容
+       var mockHeader2 = locArray[4].substr(n10+1, n9-1);//从=号后面的内容
+
+       var n11 = locArray[5].length;//地址的总长度
+       var n12 = locArray[5].indexOf("=");//取得=号的位置
+       var id2 = locArray[5].substr(n12+1, n11-1);//从=号后面的内容
 
 
        $("#mockCaseName2").val(mockCaseName2);
        $("#mockCodeName2").val(mockCodeName2);
        $("#mockTimeout2").val(mockTimeout2);
        $("#mockMsg2").val(mockMsg2);
+       $("#mockHeader2").val(mockHeader2);
        $("#id2").val(id2);
 
    </script>

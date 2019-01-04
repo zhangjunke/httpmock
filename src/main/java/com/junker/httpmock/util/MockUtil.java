@@ -13,17 +13,16 @@ public class MockUtil {
             "\"recode\":\"1111\",\n" +
             "\"remsg\":\"未找到匹配mock数据\",\n"+
             "}\n";
-    public JSONObject jsonMSG=new JSONObject(msg);
     public String timeout="100";
     public String code="200";
-
-    public void  postMocker(String url,String para){
+    public String header="";
+    public void  postMocker(String url,String para,String requestHeadersString){
         ArrayList<String> matchlist=new ArrayList<String>();
         SearchMockConfDAO smcd= new SearchMockConfDAO();
         String mockAPI_name="";
         mockAPI_name=url.replaceAll("/httpmock/mocking","");
         try {
-            matchlist=smcd.mockSettingMatch(para,mockAPI_name);
+            matchlist=smcd.mockSettingMatch(para,mockAPI_name,requestHeadersString);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -32,7 +31,7 @@ public class MockUtil {
             timeout = matchlist.get(0);
             code = matchlist.get(1);
             msg = matchlist.get(2);
+            header = matchlist.get(3);
         }
-        jsonMSG = new JSONObject(msg);
     }
 }

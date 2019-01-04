@@ -2,6 +2,7 @@ var msgList=new Map([]);
 var caseList=new Map([]);
 var timeList=new Map([]);
 var codeList=new Map([]);
+var headerList=new Map([]);
 var conditionList=new Map([]);
 var urlprefix="/httpmock";
 function  searchSubmit() {
@@ -27,12 +28,13 @@ function  searchSubmit() {
                var mockCode=list[i].mockCode;
                var mockCondition=list[i].mockCondition;
                var mockMsg=list[i].mockResponseMsg;
+               var mockHeader=list[i].mockResponseHeader;
                msgList.set(JSON.stringify(i),JSON.stringify(mockMsg));
                caseList.set(JSON.stringify(i),JSON.stringify(mockCaseName));
                timeList.set(JSON.stringify(i),JSON.stringify(mock_timeout));
                codeList.set(JSON.stringify(i),JSON.stringify(mockCode));
                conditionList.set(JSON.stringify(i),JSON.stringify(mockCondition));
-
+               headerList.set(JSON.stringify(i),JSON.stringify(mockHeader));
                 var tr=document.createElement('tr');
                 id=document.createElement('td');
                 author=document.createElement('td');
@@ -84,7 +86,7 @@ function modifyDetail(i,id){
 
     window.open("edit_mocker.html?"+"mockCaseName="+encodeURI(caseList.get(i))+"&amp;mockCode="+
         encodeURI(codeList.get(i))+"&amp;mockTime="+encodeURI(timeList.get(i))+
-        "&amp;mockMsg="+encodeURI(msgList.get(i))+"&amp;id="+encodeURI(id));
+        "&amp;mockMsg="+encodeURI(msgList.get(i))+"&amp;mockHeader="+encodeURI(headerList.get(i))+"&amp;id="+encodeURI(id));
 }
 function deleteDetail(detailid){
     var msg = "确认删除？";

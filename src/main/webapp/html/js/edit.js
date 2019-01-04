@@ -6,14 +6,15 @@ function modifySubmit(id) {
     var code=document.getElementById('mockCodeName2').value;
     var time=document.getElementById('mockTimeout2').value;
     var msg=document.getElementById('mockMsg2').value;
+    var header=document.getElementById('mockHeader2').value;
     /*var condition=document.getElementById('mockMsg2').value;*/
     if(caseName.length==0||msg.length==0||code.length==0||time.length==0){
         alert("必填项不能为空！");
     }else {
-        var data = {'detailid': detailid, 'caseName': caseName, 'code': code, 'time': time, 'msg': msg};
+        var data = {'detailid': detailid, 'caseName': caseName, 'code': code, 'time': time, 'msg': msg, 'header': header};
         $.post(modifySubmiturl, data, function (list1) {
             if (list1.indexOf("1") > -1) {
-                alert("修改失败！mock返回值不符合Json格式！");
+                alert("修改失败！mock返回值或mockHeader不符合Json格式！");
             } else {
                 alert("修改成功！");
                 window.close();
@@ -82,6 +83,7 @@ function createDetailSubmit() {
     var mock_timeout=document.getElementById("mockTimeout").value;
     var mockCode=document.getElementById("mockCodeName").value;
     var mockResponseMsg=document.getElementById("mockResponseMsg").value;
+    var mockResponseHeader=document.getElementById("mockResponseHeader").value;
     var name="";
     var APIName="";
     if(mockCaseName.length==0||mockResponseMsg.length==0||mock_timeout.length==0||mockCode.length==0){
@@ -102,6 +104,7 @@ function createDetailSubmit() {
             "mock_timeout": mock_timeout,
             "mockCode": mockCode,
             "mockResponseMsg": mockResponseMsg,
+            "mockResponseHeader": mockResponseHeader,
             "mockAPI": APIName,
             "name": name
         };
