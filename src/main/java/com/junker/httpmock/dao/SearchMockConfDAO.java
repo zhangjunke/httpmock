@@ -151,7 +151,7 @@ public class SearchMockConfDAO {
 			pstmt.setString(3, department);
 			pstmt.setString(4, user);
 			rs = pstmt.executeQuery();
-	}else{
+		}else{
 			pstmt2.setString(1, server);
 			pstmt2.setString(2, mockAPI_name);
 			rs = pstmt2.executeQuery();
@@ -166,6 +166,10 @@ public class SearchMockConfDAO {
 		String mockCode="";
 		String mockResponseMsg="";
 		String mockResponseHeader="";
+		String callbackURL="";
+		String callbackType="";
+		String callbackPara="";
+
 		int i=0;
 		while (rs.next()) {
 			HashMap<String, String> mockAPI = new HashMap<String, String>();
@@ -187,6 +191,9 @@ public class SearchMockConfDAO {
 			mockCode=rs.getString("mockCode");
 			mockResponseMsg=rs.getString("mockResponseMsg");
 			mockResponseHeader=rs.getString("mockResponseHeader");
+			callbackURL=rs.getString("callbackURL");
+			callbackType=rs.getString("callbackType");
+			callbackPara=rs.getString("callbackPara");
 			//String tmp="_"+Integer.toString(i)+"_"+mockType+","+mockCaseName+","+mock_timeout+","+mockCode;
 			mockAPI.put("id",id);
 			mockAPI.put("author",author);
@@ -196,6 +203,9 @@ public class SearchMockConfDAO {
 			mockAPI.put("mockCode",mockCode);
 			mockAPI.put("mockResponseMsg",mockResponseMsg);
 			mockAPI.put("mockResponseHeader",mockResponseHeader);
+			mockAPI.put("callbackURL",callbackURL);
+			mockAPI.put("callbackType",callbackType);
+			mockAPI.put("callbackPara",callbackPara);
 			mockAPIMap.put(i,mockAPI);
 			i++;
 		}
@@ -262,7 +272,7 @@ public class SearchMockConfDAO {
 		pstmt.close();
 		return result;
 	}
-	public int mockDetailCreate(String mockAPI_id,String mockType,String mockCaseName,String mock_timeout,String mockCode,String mockResponseMsg,String mockResponseHeader,String author_id) throws SQLException {
+	public int mockDetailCreate(String mockAPI_id,String mockType,String mockCaseName,String mock_timeout,String mockCode,String mockResponseMsg,String mockResponseHeader,String callbackURL,String callbackType,String callbackPara,String author_id) throws SQLException {
 		MOCKDETAIL_CREATE = pu.getPropertiesValue("MOCKDETAIL_CREATE");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKDETAIL_CREATE);
@@ -273,14 +283,17 @@ public class SearchMockConfDAO {
 		pstmt.setString(5,mockCode);
 		pstmt.setString(6,mockResponseMsg);
 		pstmt.setString(7,mockResponseHeader);
-		pstmt.setString(8,author_id);
+		pstmt.setString(8,callbackURL);
+		pstmt.setString(9,callbackType);
+		pstmt.setString(10,callbackPara);
+		pstmt.setString(11,author_id);
 		int result=pstmt.executeUpdate();
 		con.close();
 		pstmt.close();
 		return result;
 	}
 
-	public int mockDetailUpdate(String mockType,String mockCaseName,String mock_timeout,String mockCode,String mockResponseMsg,String mockResponseHeader,String mockDetail_id) throws SQLException {
+	public int mockDetailUpdate(String mockType,String mockCaseName,String mock_timeout,String mockCode,String mockResponseMsg,String mockResponseHeader,String callbackURL,String callbackType,String callbackPara,String mockDetail_id) throws SQLException {
 		MOCKDETAIL_UPDATE = pu.getPropertiesValue("MOCKDETAIL_UPDATE");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKDETAIL_UPDATE);
@@ -290,7 +303,10 @@ public class SearchMockConfDAO {
 		pstmt.setString(4,mockCode);
 		pstmt.setString(5,mockResponseMsg);
 		pstmt.setString(6,mockResponseHeader);
-		pstmt.setString(7,mockDetail_id);
+		pstmt.setString(7,callbackURL);
+		pstmt.setString(8,callbackType);
+		pstmt.setString(9,callbackPara);
+		pstmt.setString(10,mockDetail_id);
 		int result= pstmt.executeUpdate();
 		con.close();
 		pstmt.close();
@@ -349,10 +365,8 @@ public class SearchMockConfDAO {
 				if(null==para||para.equals("")){
 					para="ALL";
 				}
-				System.out.println("eachHeader:"+header);
-				System.out.println("eachpara:"+para);
 				pstmt.setString(1, para);
-				pstmt.setString(2, header);
+				pstmt.setString(2, "ALL");
 				rs = pstmt.executeQuery();
 
 				int flag = 0;
@@ -361,8 +375,14 @@ public class SearchMockConfDAO {
 					String mockCode = rs.getString("mockCode");
 					String mockResponseMsg = rs.getString("mockResponseMsg");
 					String mockResponseHeader=rs.getString("mockResponseHeader");
+					String callbackURL=rs.getString("callbackURL");
+					String callbackType=rs.getString("callbackType");
+					String callbackPara=rs.getString("callbackPara");
 					System.out.println("mockResponseMsg:"+mockResponseMsg);
 					System.out.println("mockResponseHeader:"+mockResponseHeader);
+					System.out.println("callbackURL:"+callbackURL);
+					System.out.println("callbackType:"+callbackType);
+					System.out.println("callbackPara:"+callbackPara);
 
 					if(null!=mockResponseMsg||!mockResponseMsg.equals("")){
 						flag=1;
@@ -371,6 +391,9 @@ public class SearchMockConfDAO {
 					matchList.add(mockCode);
 					matchList.add(mockResponseMsg);
 					matchList.add(mockResponseHeader);
+					matchList.add(callbackURL);
+					matchList.add(callbackType);
+					matchList.add(callbackPara);
 				}
 			}
 		}

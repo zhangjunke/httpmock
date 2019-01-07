@@ -4,6 +4,9 @@ var timeList=new Map([]);
 var codeList=new Map([]);
 var headerList=new Map([]);
 var conditionList=new Map([]);
+var callbackURLList=new Map([]);
+var callbackTypeList=new Map([]);
+var callbackParaList=new Map([]);
 var urlprefix="/httpmock";
 function  searchSubmit() {
     var departmentV=document.getElementById('department');
@@ -20,21 +23,27 @@ function  searchSubmit() {
         if (list != null) { //后台传回来的select选项
             listBody.innerHTML="";
             for (var i = 0; i < list.length; i++) {
-               var id=list[i].id;
-               var author=list[i].author;
-               var mockType=list[i].mockType;
-               var mockCaseName=list[i].mockCaseName;
-               var mock_timeout=list[i].mock_timeout;
-               var mockCode=list[i].mockCode;
-               var mockCondition=list[i].mockCondition;
-               var mockMsg=list[i].mockResponseMsg;
-               var mockHeader=list[i].mockResponseHeader;
-               msgList.set(JSON.stringify(i),JSON.stringify(mockMsg));
-               caseList.set(JSON.stringify(i),JSON.stringify(mockCaseName));
-               timeList.set(JSON.stringify(i),JSON.stringify(mock_timeout));
-               codeList.set(JSON.stringify(i),JSON.stringify(mockCode));
-               conditionList.set(JSON.stringify(i),JSON.stringify(mockCondition));
-               headerList.set(JSON.stringify(i),JSON.stringify(mockHeader));
+                var id=list[i].id;
+                var author=list[i].author;
+                var mockType=list[i].mockType;
+                var mockCaseName=list[i].mockCaseName;
+                var mock_timeout=list[i].mock_timeout;
+                var mockCode=list[i].mockCode;
+                var mockCondition=list[i].mockCondition;
+                var mockMsg=list[i].mockResponseMsg;
+                var mockResponseHeader=list[i].mockResponseHeader;
+                var callbackURL=list[i].callbackURL;
+                var callbackType=list[i].callbackType;
+                var callbackPara=list[i].callbackPara;
+                msgList.set(JSON.stringify(i),JSON.stringify(mockMsg));
+                caseList.set(JSON.stringify(i),JSON.stringify(mockCaseName));
+                timeList.set(JSON.stringify(i),JSON.stringify(mock_timeout));
+                codeList.set(JSON.stringify(i),JSON.stringify(mockCode));
+                conditionList.set(JSON.stringify(i),JSON.stringify(mockCondition));
+                headerList.set(JSON.stringify(i),JSON.stringify(mockResponseHeader));
+                callbackURLList.set(JSON.stringify(i),JSON.stringify(callbackURL));
+                callbackTypeList.set(JSON.stringify(i),JSON.stringify(callbackType));
+                callbackParaList.set(JSON.stringify(i),JSON.stringify(callbackPara));
                 var tr=document.createElement('tr');
                 id=document.createElement('td');
                 author=document.createElement('td');
@@ -42,6 +51,8 @@ function  searchSubmit() {
                 mockCaseName=document.createElement('td');
                 mockCode=document.createElement('td');
                 mock_timeout=document.createElement('td');
+                callbackURL=document.createElement('td');
+                callbackPara=document.createElement('td');
                 mockCondition=document.createElement('td');
                 var option=document.createElement('td');
 
@@ -49,8 +60,10 @@ function  searchSubmit() {
                 author.innerHTML=list[i].author;
                 mockType.innerHTML=list[i].mockType;
                 mockCaseName.innerHTML=list[i].mockCaseName;
-                mock_timeout.innerHTML=list[i].mock_timeout;
                 mockCode.innerHTML=list[i].mockCode;
+                mock_timeout.innerHTML=list[i].mock_timeout;
+                callbackURL.innerHTML=list[i].callbackType+": "+list[i].callbackURL;
+                callbackPara.innerHTML=list[i].callbackPara;
                 mockCondition.innerHTML=list[i].mockCondition;
                 option.innerHTML="<td class=\"center\">\n" +
                     "\t<input id=\"btn1\" type=\"button\" onclick=\"viewDetail('"+i+"')\" value=\"查看\" class=\"tdBtn checkBtn\"/>\n" +
@@ -64,6 +77,8 @@ function  searchSubmit() {
                 tr.appendChild(mockCaseName);
                 tr.appendChild(mockCode);
                 tr.appendChild(mock_timeout);
+                tr.appendChild(callbackURL);
+                tr.appendChild(callbackPara);
                 tr.appendChild(mockCondition);
                 tr.appendChild(option);
                 listBody.appendChild(tr);
@@ -74,7 +89,7 @@ function  searchSubmit() {
     }
 
 function  viewDetail(i) {
-    var text = '<div id="pop" class="pop"><div class="title" id="title" style="width:600px;word-wrap:break-word">'+msgList.get(i)
+    var text = '<div id="pop" class="pop"><div class="title" id="title" style="width:600px;word-wrap:break-word">'+"Mock Response Header: "+headerList.get(i)+"<br> Mock Response Message: "+msgList.get(i)
         +'</div><div class="btn" id="btn-right" onclick="cancel(this)">'+'关闭'+'</div></div>';
     openPop("#container","#pop",500,600,text);
 }
@@ -86,7 +101,9 @@ function modifyDetail(i,id){
 
     window.open("edit_mocker.html?"+"mockCaseName="+encodeURI(caseList.get(i))+"&amp;mockCode="+
         encodeURI(codeList.get(i))+"&amp;mockTime="+encodeURI(timeList.get(i))+
-        "&amp;mockMsg="+encodeURI(msgList.get(i))+"&amp;mockHeader="+encodeURI(headerList.get(i))+"&amp;id="+encodeURI(id));
+        "&amp;mockMsg="+encodeURI(msgList.get(i))+"&amp;mockHeader="+encodeURI(headerList.get(i))+"&amp;callbackURL="
+        +encodeURI(callbackURLList.get(i))+"&amp;callbackType="+encodeURI(callbackTypeList.get(i))+"&amp;callbackPara="
+        +encodeURI(callbackParaList.get(i))+"&amp;id="+encodeURI(id));
 }
 function deleteDetail(detailid){
     var msg = "确认删除？";

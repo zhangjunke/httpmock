@@ -1,8 +1,7 @@
 package com.junker.httpmock.servlet;
 
-import com.junker.httpmock.util.JsonFormatCheck;
-import com.junker.httpmock.util.JsonStringExchangeUtil;
-import com.junker.httpmock.util.MockUtil;
+import com.junker.httpmock.util.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -72,10 +71,17 @@ public class MockerServlet extends HttpServlet {
         String timeout=mu.timeout;
         String code=mu.code;
         String headers="["+mu.header+"]";
+        String callbackURL=mu.callbackURL;
+        String callbackType=mu.callbackType;
+        String callbackPara=mu.callbackPara;
+
         System.out.println("Mockermsg:"+msg);
         System.out.println("Mockertimeout:"+timeout);
         System.out.println("Mockercode:"+code);
         System.out.println("Mockerheaders:"+headers);
+        System.out.println("callbackURL:"+callbackURL);
+        System.out.println("callbackType:"+callbackType);
+        System.out.println("callbackPara:"+callbackPara);
 
         JSONArray json = JSONArray.fromObject(headers);
         for(int i=0; i<json.size(); i++){
@@ -99,13 +105,14 @@ public class MockerServlet extends HttpServlet {
         out.println(resultBuffer.toString());
         out.flush();
         out.close();
+        if(null!=callbackURL&&callbackURL.length()>0){
+            ThreadUtil tu =new ThreadUtil(callbackURL,callbackType,callbackPara,paraString);
+            new Thread(tu).start();
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }
-    public static void main(String[] args){
-        String headers="[{\"Content-type\":\"text/html;charset=UTF-8\"}]";
-        JSONArray json = JSONArray.fromObject(headers);
-    }
+    public static void main(String[] args){}
 }

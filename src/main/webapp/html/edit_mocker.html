@@ -39,6 +39,18 @@
     <td style="text-align:right;">mock返回值：</td>
     <td><textarea name="text" style="width:500px; height:300px;" class="textBox length-middle" id="mockMsg2" ></textarea></td>
    </tr>
+   <tr>
+    <td style="text-align:right;">回调地址：</td>
+    <td><input id ="callbackURL2" class="textBox length-middle"  style="width:500px"  ></td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">回调方式：</td>
+    <td><select name="callbackType2" id="callbackType2" style="width:150px"  class="inline-select"><option value="post">post</option><option value="get">get</option></select></td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">回调传参：</td>
+    <td><textarea id ="callbackPara2" class="textBox length-middle"  style="width:500px; height:100px;" ></textarea></td>
+   </tr>
 <!--     <tr>
     <td style="text-align:right;">mock生效条件：</td>
     <td><input type="text" class="textBox length-middle" id ="mockMsg2" /></td>
@@ -71,14 +83,36 @@
 
        var n11 = locArray[5].length;//地址的总长度
        var n12 = locArray[5].indexOf("=");//取得=号的位置
-       var id2 = locArray[5].substr(n12+1, n11-1);//从=号后面的内容
+       var callbackURL2 = locArray[5].substr(n12+2, n11-1).replace("\"","");//从=号后面的内容
 
+       var n13 = locArray[6].length;//地址的总长度
+       var n14 = locArray[6].indexOf("=");//取得=号的位置
+       var callbackType2 = locArray[6].substr(n14+2, n13-1);//从=号后面的内容
 
+       var n15 = locArray[7].length;//地址的总长度
+       var n16 = locArray[7].indexOf("=");//取得=号的位置
+       var callbackPara2 = locArray[7].substr(n16+2, n15-1).replace("\"","");//从=号后面的内容
+
+       var n17 = locArray[8].length;//地址的总长度
+       var n18 = locArray[8].indexOf("=");//取得=号的位置
+       var id2 = locArray[8].substr(n18+1, n17-1);//从=号后面的内容
+       if(mockHeader2==null){
+           mockHeader2="";
+       }
+       if(callbackURL2=="--"){
+           callbackURL2="";
+       }
+       if(callbackPara2=="--"){
+           callbackPara2="";
+       }
        $("#mockCaseName2").val(mockCaseName2);
        $("#mockCodeName2").val(mockCodeName2);
        $("#mockTimeout2").val(mockTimeout2);
        $("#mockMsg2").val(mockMsg2);
        $("#mockHeader2").val(mockHeader2);
+       $("#callbackURL2").val(callbackURL2);
+       $("#callbackType2").val(callbackType2);
+       $("#callbackPara2").val(callbackPara2);
        $("#id2").val(id2);
 
    </script>

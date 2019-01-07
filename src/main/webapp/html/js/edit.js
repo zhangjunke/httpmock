@@ -7,11 +7,16 @@ function modifySubmit(id) {
     var time=document.getElementById('mockTimeout2').value;
     var msg=document.getElementById('mockMsg2').value;
     var header=document.getElementById('mockHeader2').value;
-    /*var condition=document.getElementById('mockMsg2').value;*/
-    if(caseName.length==0||msg.length==0||code.length==0||time.length==0){
+    var callbackURL=document.getElementById('callbackURL2').value;
+    var callbackType=document.getElementById('callbackType2').value;
+    var callbackPara=document.getElementById('callbackPara2').value;
+    var reg=/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/;
+    if(caseName.length==0||msg.length==0||code.length==0||time.length==0||(callbackURL.length>0&&callbackType.length==0)){
         alert("必填项不能为空！");
-    }else {
-        var data = {'detailid': detailid, 'caseName': caseName, 'code': code, 'time': time, 'msg': msg, 'header': header};
+    }else if(!reg.test(callbackURL)){
+        alert("url必须是以http://或https://开头的合法网址！");
+    }else{
+        var data = {'detailid': detailid, 'caseName': caseName, 'code': code, 'time': time, 'msg': msg, 'header': header, 'callbackURL': callbackURL, 'callbackType': callbackType, 'callbackPara': callbackPara};
         $.post(modifySubmiturl, data, function (list1) {
             if (list1.indexOf("1") > -1) {
                 alert("修改失败！mock返回值或mockHeader不符合Json格式！");
@@ -84,11 +89,18 @@ function createDetailSubmit() {
     var mockCode=document.getElementById("mockCodeName").value;
     var mockResponseMsg=document.getElementById("mockResponseMsg").value;
     var mockResponseHeader=document.getElementById("mockResponseHeader").value;
+    var callbackURL=document.getElementById("callbackURL").value;
+    var callbackType=document.getElementById("callbackType").value;
+    var callbackPara=document.getElementById("callbackPara").value;
     var name="";
     var APIName="";
+    var reg=/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/;
+
     if(mockCaseName.length==0||mockResponseMsg.length==0||mock_timeout.length==0||mockCode.length==0){
         alert("必填项不能为空！");
-    }else {
+    }else if(!reg.test(callbackURL)){
+        alert("url必须是以http://或https://开头的合法网址！");
+    }else{
         var url = location.search; //获取url中"?"符后的字串
         if (url.indexOf("?") != -1) {
             var str = url.substr(1);
@@ -105,6 +117,9 @@ function createDetailSubmit() {
             "mockCode": mockCode,
             "mockResponseMsg": mockResponseMsg,
             "mockResponseHeader": mockResponseHeader,
+            "callbackURL": callbackURL,
+            "callbackType": callbackType,
+            "callbackPara": callbackPara,
             "mockAPI": APIName,
             "name": name
         };
@@ -158,4 +173,5 @@ function createAPISubmit(){
             }
         })
     }
+
 }

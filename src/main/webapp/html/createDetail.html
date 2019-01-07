@@ -12,9 +12,12 @@
         <span class="modular fl"><i class="edit_user"></i><em>新增mock信息</em></span>
     </div>
 
+    <style>
+        body{ text-align:start}
+        .div{ margin:0 auto; width:150px; height:55px; border:1px solid #FFFFFF}
+    </style>
 
-
-    <table class="list-style">
+    <table class="list-style" name="table">
         <tr>
             <td style="width:15%;text-align:right;">mock场景：</td>
             <td><input type="text" style="width:500px" class="textBox length-middle" placeholder="e.g:测试投资成功" id ="mockCaseName"  /></td>
@@ -25,25 +28,30 @@
        </tr>
         <tr>
             <td style="text-align:right;">mock超时时间(ms)：</td>
-            <td><input id ="mockTimeout" class="textBox length-middle"  style="width:500px" onkeyup="this.value=this.value.replace(/\D/g,'')"  placeholder="代表多少毫秒后返回结果。e.g:1000." onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
+            <td><input id ="mockTimeout" class="textBox length-middle"  style="width:500px" onkeyup="this.value=this.value.replace(/\D/g,'')"  placeholder="代表多少毫秒后返回结果。e.g:1000" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
         </tr>
         <tr>
             <td style="text-align:right;">mock返回Header：</td>
-            <td><textarea name="text" style="width:500px; height:300px;" class="textBox length-middle" placeholder="Json格式字符串。e.g:{&quot;Content-Type&quot;:&quot;application/json;charset=UTF-8&quot;,&quot;Set-Cookie&quot;:&quot;JSESSIONID=aa31ab81a6c24104aa70790f043b1413; Domain=.yqxiu.cn; Path=/; Max-Age=604800; Expires=Wed, 09-Jan-2019 02:28:41 GMT&quot;}" id="mockResponseHeader" ></textarea></td>
+            <td><textarea name="text" style="width:500px; height:100px;" class="textBox length-middle" placeholder="Json格式字符串。e.g:{&quot;Content-Type&quot;:&quot;application/json;charset=UTF-8&quot;,&quot;Set-Cookie&quot;:&quot;JSESSIONID=aa31ab81a6c24104aa70790f043b1413; Domain=.yqxiu.cn; Path=/; Max-Age=604800; Expires=Wed, 09-Jan-2019 02:28:41 GMT&quot;}" id="mockResponseHeader" ></textarea></td>
         </tr>
-             <tr>
-                <td style="text-align:right;">mock返回值：</td>
-                <td><textarea name="text" style="width:500px; height:300px;" class="textBox length-middle" placeholder="Json格式字符串" id="mockResponseMsg" ></textarea></td>
-            </tr>
+        <tr>
+            <td style="text-align:right;">mock返回值：</td>
+            <td><textarea name="text" style="width:500px; height:100px;" class="textBox length-middle" placeholder="Json格式字符串。e.g:{&quot;code&quot;:&quot;0000&quot;,&quot;msg&quot;:&quot;操作成功&quot;}" id="mockResponseMsg" ></textarea></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">回调地址：</td>
+            <td><input id ="callbackURL" class="textBox length-middle"  style="width:500px"   placeholder="绝对路径。e.g:http://bbs.mysite.com/qqlogin.php" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">回调方式：</td>
+            <td><select name="callbackType" id="callbackType" style="width:150px"  class="inline-select"><option value="post">post</option><option value="get">get</option></select></td>
+        </tr>
 
+        <tr>
+            <td style="text-align:right;">回调传参：</td>
+            <td><textarea id ="callbackPara" class="textBox length-middle"  style="width:500px; height:100px;"   placeholder="键对值形式。值参数化表达式'${参数名A}'，代表需提取请求参数中名为A的参数值。e.g:orderid=${transaction_id}&success=true" onafterpaste="this.value=this.value.replace(/\D/g,'')" ></textarea></td>
+        </tr>
 
-
-<!--        <script language="javascript" type="text/javascript">
-            var mockCaseName=document.getElementById('"+mockCaseName+"').value;
-            var mockCodeName=document.getElementById('"+mockCodeName+"').value;
-            var mockTimeout=document.getElementById('"+mockTimeout+"').value;
-            var mockCondition=document.getElementById('"+mockCondition+"').value;
-        </script>-->
         <tr>
             <td style="text-align:right;"></td>
             <td><input type="submit" class="tdBtn" value="提交" onclick="createDetailSubmit()"/></td>

@@ -22,6 +22,9 @@ public class ModifySubmitServlet extends HttpServlet {
         String time=request.getParameter("time");
         String msg=request.getParameter("msg");
         String header=request.getParameter("header");
+        String callbackURL=request.getParameter("callbackURL");
+        String callbackType=request.getParameter("callbackType");
+        String callbackPara=request.getParameter("callbackPara");
         //String condition=request.getParameter("condition");
         System.out.println("modifySubmit_detailid:"+detailid);
         System.out.println("modifySubmit_caseName:"+caseName);
@@ -29,6 +32,9 @@ public class ModifySubmitServlet extends HttpServlet {
         System.out.println("modifySubmit_time:"+time);
         System.out.println("modifySubmit_msg:"+msg);
         System.out.println("modifySubmit_header:"+header);
+        System.out.println("modifySubmit_callbackURL:"+callbackURL);
+        System.out.println("modifySubmit_callbackType:"+callbackType);
+        System.out.println("modifySubmit_callbackPara:"+callbackPara);
         JsonFormatCheck jfc=new JsonFormatCheck();
         int result1=jfc.checkFormat_Json(msg);
         int result2=jfc.checkFormat_Json(header);
@@ -38,7 +44,7 @@ public class ModifySubmitServlet extends HttpServlet {
             modifyResult="1";
         }else {
             try {
-                smf.mockDetailUpdate("返回值", caseName, time, code, msg, header,detailid);
+                smf.mockDetailUpdate("返回值", caseName, time, code, msg, header,callbackURL,callbackType,callbackPara,detailid);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

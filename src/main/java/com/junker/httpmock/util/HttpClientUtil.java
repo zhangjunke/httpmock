@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import com.junker.httpmock.global.SSLClient;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,17 +17,19 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 public class HttpClientUtil {
     public String doGet(String url,Map<String,String> HeaderMap,String charset){
+        System.out.println("回调url："+url);
         HttpClient httpClient = null;
 
         // get method
         HttpGet httpGet = new HttpGet(url);
 
         // set headers
-        List<NameValuePair> HeaderList = new ArrayList<NameValuePair>();
-        Iterator iterator1 = HeaderMap.entrySet().iterator();
-        while(iterator1.hasNext()){
-            Entry<String,String> elem = (Entry<String, String>) iterator1.next();
-            httpGet.setHeader(elem.getKey(),elem.getValue());
+        if(null!=HeaderMap){
+            Iterator iterator1 = HeaderMap.entrySet().iterator();
+            while(iterator1.hasNext()){
+                Entry<String,String> elem = (Entry<String, String>) iterator1.next();
+                httpGet.setHeader(elem.getKey(),elem.getValue());
+            }
         }
 
         //response
@@ -43,10 +44,11 @@ public class HttpClientUtil {
             HttpEntity entity = response.getEntity();
             temp=EntityUtils.toString(entity,"UTF-8");
         }catch (Exception e) {}
-
+        System.out.println("回调结果："+temp);
         return temp;
     }
     public String doPost(String url,Map<String,String> map,String charset){
+        System.out.println("回调url："+url);
         HttpClient httpClient = null;
         HttpPost httpPost = null;
         String result = null;
@@ -73,6 +75,7 @@ public class HttpClientUtil {
         }catch(Exception ex){
             ex.printStackTrace();
         }
+        System.out.println("回调结果："+result);
         return result;
     }
 }

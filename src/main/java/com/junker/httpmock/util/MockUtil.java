@@ -16,6 +16,9 @@ public class MockUtil {
     public String timeout="100";
     public String code="200";
     public String header="";
+    public String callbackURL ="";
+    public String callbackType ="";
+    public String callbackPara ="";
     public void  postMocker(String url,String para,String requestHeadersString){
         ArrayList<String> matchlist=new ArrayList<String>();
         SearchMockConfDAO smcd= new SearchMockConfDAO();
@@ -32,6 +35,9 @@ public class MockUtil {
             code = matchlist.get(1);
             msg = matchlist.get(2);
             header = matchlist.get(3);
+            callbackURL= matchlist.get(4);
+            callbackType= matchlist.get(5);
+            callbackPara= matchlist.get(6);
         }
     }
 }

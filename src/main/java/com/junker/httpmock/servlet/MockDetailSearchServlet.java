@@ -62,6 +62,9 @@ public class MockDetailSearchServlet extends HttpServlet {
                 String mockCode="";
                 String mockResponseMsg="";
                 String mockResponseHeader="";
+                String callbackURL="";
+                String callbackType="";
+                String callbackPara="";
                 String eachAPIString="";
                 for(int j=0;j<apicount;j++){
                     id=mockAPI.get("id");
@@ -72,6 +75,17 @@ public class MockDetailSearchServlet extends HttpServlet {
                     mockCode=mockAPI.get("mockCode");
                     mockResponseMsg=mockAPI.get("mockResponseMsg");
                     mockResponseHeader=mockAPI.get("mockResponseHeader");
+                    callbackURL=mockAPI.get("callbackURL");
+                    callbackType=mockAPI.get("callbackType");
+                    callbackPara=mockAPI.get("callbackPara");
+                    if(null==mockResponseHeader||mockResponseHeader.length()<1){
+                        mockResponseHeader="null";
+                    }
+                    if(null==callbackURL||callbackURL.length()<1){
+                        callbackURL="--";
+                        callbackType="--";
+                        callbackPara="--";
+                    }
                     smcd.mockConditionSearch(id);
                     HashMap<String,String> conditions =mdd.conditions;
                     String conditionString="";
@@ -84,7 +98,8 @@ public class MockDetailSearchServlet extends HttpServlet {
                         // 此时的String类型的key就是我们需要的获取的值
                     }
                     eachAPIString="{\"id\":\""+id+"\",\"author\":\""+author+"\","+"\"mockType\":\""+mockType+"\","+"\"mockCaseName\":\""+mockCaseName+"\","+"\"mock_timeout\":\""+mock_timeout+"\","+
-                            "\"mockCode\":\""+mockCode+"\","+"\"mockCondition\":\""+conditionString+"\","+"\"mockResponseMsg\":"+mockResponseMsg+","+"\"mockResponseHeader\":"+mockResponseHeader+"}";
+                            "\"mockCode\":\""+mockCode+"\","+"\"mockCondition\":\""+conditionString+"\","+"\"mockResponseMsg\":"+mockResponseMsg+","+"\"mockResponseHeader\":"+mockResponseHeader+","+
+                            "\"callbackURL\":\""+callbackURL+"\","+"\"callbackType\":\""+callbackType+"\","+"\"callbackPara\":\""+callbackPara+"\"}";
                 }
                 jsonString+=eachAPIString+",";
             }

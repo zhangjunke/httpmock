@@ -27,6 +27,9 @@ public class MockDetailCreateServlet extends HttpServlet {
         String mockCode=request.getParameter("mockCode");
         String mockResponseMsg=request.getParameter("mockResponseMsg");
         String mockResponseHeader=request.getParameter("mockResponseHeader");
+        String callbackURL=request.getParameter("callbackURL");
+        String callbackType=request.getParameter("callbackType");
+        String callbackPara=request.getParameter("callbackPara");
         String mockAPI=request.getParameter("mockAPI");
         String name=request.getParameter("name");
 
@@ -38,7 +41,7 @@ public class MockDetailCreateServlet extends HttpServlet {
             try {
                 String APIId=smf.mockAPIidSearch(mockAPI);
                 String nameId=smf.useridSearch(name);
-                smf.mockDetailCreate(APIId,mockType,mockCaseName,mock_timeout,mockCode,mockResponseMsg,mockResponseHeader,nameId);
+                smf.mockDetailCreate(APIId,mockType,mockCaseName,mock_timeout,mockCode,mockResponseMsg,mockResponseHeader,callbackURL,callbackType,callbackPara,nameId);
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
