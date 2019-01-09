@@ -87,6 +87,13 @@ function  searchSubmit() {
 
     })
     }
+function  viewDetail_help() {
+    var text = '<div id="pop" class="pop"><div class="title" id="title" style="width:600px;word-wrap:break-word">'+"我能做什么：模拟任意提供http服务的后端系统。如果服务提供方还未完成或不稳定、影响你进行联调测试或者你想让服务提供方返回某种难以模拟的返回值，你可以使用本功能。\n" +
+        "\n" +
+        "需要怎么做：1、创建接口信息；2、新增mock数据、设置mock条件；3、将原调用地址\"http://ip:port\"改为\"http://192.168.1.128:8080/httpmock/mocking\""
+        +'</div><div class="btn" id="btn-right" onclick="cancel(this)">'+'关闭'+'</div></div>';
+    openPop("#container","#pop",500,600,text);
+}
 
 function  viewDetail(i) {
     var text = '<div id="pop" class="pop"><div class="title" id="title" style="width:600px;word-wrap:break-word">'+"Mock Response Header: "+headerList.get(i)+"<br> Mock Response Message: "+msgList.get(i)

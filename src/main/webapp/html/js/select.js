@@ -46,7 +46,7 @@ $.ajax({
         }
     },
     error:function(){
-        J.alert('Error');
+        alert('Error');
     }
 })
 

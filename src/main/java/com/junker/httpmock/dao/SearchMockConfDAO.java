@@ -353,8 +353,6 @@ public class SearchMockConfDAO {
 		String[] eachHeader=requestHeadersString.split("&");
 		int count1=eachHeader.length;
 		int count2=eachPara.length;
-		System.out.println("eachHeader.length:"+count1);
-		System.out.println("eachPara.length:"+count2);
 		for(int i=0;i<count1;i++) {
 			for(int j=0;j<count2;j++){
 				String header = eachHeader[i];
@@ -378,11 +376,6 @@ public class SearchMockConfDAO {
 					String callbackURL=rs.getString("callbackURL");
 					String callbackType=rs.getString("callbackType");
 					String callbackPara=rs.getString("callbackPara");
-					System.out.println("mockResponseMsg:"+mockResponseMsg);
-					System.out.println("mockResponseHeader:"+mockResponseHeader);
-					System.out.println("callbackURL:"+callbackURL);
-					System.out.println("callbackType:"+callbackType);
-					System.out.println("callbackPara:"+callbackPara);
 
 					if(null!=mockResponseMsg||!mockResponseMsg.equals("")){
 						flag=1;

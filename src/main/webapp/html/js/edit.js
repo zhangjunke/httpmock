@@ -13,7 +13,7 @@ function modifySubmit(id) {
     var reg=/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/;
     if(caseName.length==0||msg.length==0||code.length==0||time.length==0||(callbackURL.length>0&&callbackType.length==0)){
         alert("必填项不能为空！");
-    }else if(!reg.test(callbackURL)){
+    }else if(callbackURL.length!=0&&!reg.test(callbackURL)){
         alert("url必须是以http://或https://开头的合法网址！");
     }else{
         var data = {'detailid': detailid, 'caseName': caseName, 'code': code, 'time': time, 'msg': msg, 'header': header, 'callbackURL': callbackURL, 'callbackType': callbackType, 'callbackPara': callbackPara};

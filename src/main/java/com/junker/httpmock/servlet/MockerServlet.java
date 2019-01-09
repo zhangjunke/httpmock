@@ -32,7 +32,6 @@ public class MockerServlet extends HttpServlet {
         String requestHeadersString = "";
         while (requestHeaderNames.hasMoreElements()) {
             String requestHeaderString = requestHeaderNames.nextElement();
-            System.out.println("requestHeaderS："+requestHeaderString);
             String headerValueString = "";
             headerValueString = request.getHeader(requestHeaderString);
             requestHeadersString+=requestHeaderString+"="+headerValueString+"&";
@@ -47,7 +46,6 @@ public class MockerServlet extends HttpServlet {
         String paraString="";
         while (paramNames.hasMoreElements()) {
             String paraNameString = paramNames.nextElement();
-            System.out.println("paraS："+paraNameString);
             if (jfc.checkFormat_Json(paraNameString) == 0) {
                 paraString = JsonStringExchangeUtil.JsonStringToPara(paraNameString);
             } else {
@@ -64,8 +62,8 @@ public class MockerServlet extends HttpServlet {
 
         MockUtil mu=new MockUtil();
         mu.postMocker(requestURI,paraString,requestHeadersString);
-        response.setHeader("Content-type", "text/html;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
+
+
 
         String msg=mu.msg;
         String timeout=mu.timeout;
@@ -93,7 +91,11 @@ public class MockerServlet extends HttpServlet {
                 response.setHeader(key,value);//设置responseheader
             }
         }
+        if(headers.equals("[]")||!headers.contains("Content-type")){
+            response.setHeader("Content-type", "text/html;charset=UTF-8");
+        }
 
+        response.setCharacterEncoding("UTF-8");
         try {
             Thread.sleep(Long.parseLong(timeout));
             response.setStatus(Integer.parseInt(code));
@@ -114,5 +116,4 @@ public class MockerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }
-    public static void main(String[] args){}
 }

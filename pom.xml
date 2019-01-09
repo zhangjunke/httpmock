@@ -160,7 +160,7 @@
             <charset>utf-8</charset>
             <uriEncoding>UTF-8</uriEncoding>
             <url>http://localhost:8080/manager/html</url>
-            <server>tomcat8</server>
+            <server>tomcat7</server>
             <username>admin</username>
             <password>admin</password>
             <port>8080</port>
