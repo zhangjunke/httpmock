@@ -1,4 +1,4 @@
-﻿var urlprefix="/httpmock";
+﻿var urlprefix="";
 var url_1=urlprefix+"/mocker/index/type=department";
 var url_2=urlprefix+"/mocker/index/type=server";
 var url_3 =urlprefix+"/mocker/selectOption/type=department";

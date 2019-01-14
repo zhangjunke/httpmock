@@ -15,15 +15,15 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Logger;
 
-@WebServlet(name = "IndexPageServlet")
-public class IndexPageServlet extends HttpServlet {
+@WebServlet(name = "IndexSelectServlet")
+public class IndexSelectServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static Logger logger = Logger.getLogger("logger");
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doGet(request,response);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         SearchMockConfDAO smcd = new SearchMockConfDAO();
         HashMap<Integer, String> searchResult = new HashMap<Integer, String>();
         request.setCharacterEncoding("utf-8");

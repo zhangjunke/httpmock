@@ -81,16 +81,19 @@ public class MockerServlet extends HttpServlet {
         System.out.println("callbackType:"+callbackType);
         System.out.println("callbackPara:"+callbackPara);
 
-        JSONArray json = JSONArray.fromObject(headers);
-        for(int i=0; i<json.size(); i++){
-            JSONObject obj = (JSONObject) json.get(i);
-            Iterator it = obj.keys();
-            while (it.hasNext()) {
-                String key = it.next().toString();
-                String value = obj.get(key).toString();
-                response.setHeader(key,value);//设置responseheader
+        if(!headers.equals("[null]")){
+            JSONArray json = JSONArray.fromObject(headers);
+            for(int i=0; i<json.size(); i++){
+                JSONObject obj = (JSONObject) json.get(i);
+                Iterator it = obj.keys();
+                while (it.hasNext()) {
+                    String key = it.next().toString();
+                    String value = obj.get(key).toString();
+                    response.setHeader(key,value);//设置responseheader
+                }
             }
         }
+
         if(headers.equals("[]")||!headers.contains("Content-type")){
             response.setHeader("Content-type", "text/html;charset=UTF-8");
         }

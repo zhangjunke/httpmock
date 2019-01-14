@@ -27,22 +27,23 @@ public class MockConditionSettingServlet extends HttpServlet {
         String url=request.getRequestURI();
         RegexUtil ru=new RegexUtil();
         SearchMockConfDAO smcf=new SearchMockConfDAO();
-        String detailId=ru.getMatcher("detailId=(.*)&conditionId",url);
-        String conditionId=ru.getMatcher("conditionId=(.*)&conditionS",url);
-        String conditionS1=ru.getMatcher("conditionS=(.*)",url);
-        detailId=detailId.replaceAll("\"","");
-        conditionId=conditionId.replaceAll("\"","");
-        String conditionS=java.net.URLDecoder.decode(conditionS1,"UTF-8").replaceAll("\"","").replaceAll("\'","");
+        String detailId=request.getParameter("detailId");
+        String conditionId=request.getParameter("conditionId");
+        String conditionS=request.getParameter("conditionS");
+        String type =request.getParameter("type");
+        //detailId=detailId.replaceAll("\"","");
+        //conditionId=conditionId.replaceAll("\"","");
+        //String conditionS=java.net.URLDecoder.decode(conditionS1,"UTF-8").replaceAll("\"","").replaceAll("\'","");
 		String result="";
 
-        if (!url.contains("type=delete")&&conditionS.length()!=0&&conditionS.split("=").length!=2) {
+        if (!type.equals("delete")&&conditionS.length()!=0&&conditionS.split("=").length!=2) {
             result="1";
         }else {
             try {
-                if (url.contains("type=delete")) {
+                if (type.equals("delete")) {
                     smcf.mockConditionDelete(conditionId);
                     result="0";
-                }else if (url.contains("type=modify")) {
+                }else if (type.equals("modify")) {
                     smcf.mockConditionUpdate(conditionId, conditionS);
                     result="0";
                 } else{

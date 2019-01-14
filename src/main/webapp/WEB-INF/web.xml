@@ -22,7 +22,7 @@
 
   <servlet>
     <servlet-name>IndexPageServlet</servlet-name>
-    <servlet-class>com.junker.httpmock.servlet.IndexPageServlet</servlet-class>
+    <servlet-class>com.junker.httpmock.servlet.IndexSelectServlet</servlet-class>
 
   </servlet>
   <servlet-mapping>

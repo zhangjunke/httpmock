@@ -1,4 +1,4 @@
-var urlprefix="/httpmock";
+var urlprefix="";
 function modifySubmit(id) {
     var modifySubmiturl =urlprefix+ "/mocker/ModifySubmit";
     var detailid=id;
@@ -27,12 +27,28 @@ function modifySubmit(id) {
         })
     }
 }
-
+/*
 function modifyCondition(conIdList,i) {
     var conId=conIdList.get(i);
     var conS=document.getElementById(i).value;
-    var url=urlprefix+"/mocker/MockConditionSetting/type=modify&detailId=0&conditionId="+conId+"&conditionS="+conS;
+    var url=urlprefix+"/mocker/MockConditionSetting?type=modify&detailId=0&conditionId="+conId+"&conditionS="+conS;
     $.get(url,function (list1) {
+        if(list1.indexOf("1")>-1){
+            alert("修改失败！条件的格式必须为：A=B");
+        }else if(list1.indexOf("2")>-1){
+            alert("修改失败！已有mock场景设置了此条件");
+        }else{
+            alert("修改成功！");
+            window.close();
+        }
+    })
+}*/
+function modifyCondition(conIdList,i) {
+    var conId=conIdList.get(i);
+    var conS=document.getElementById(i).value;
+    var data = {'type': "modify", 'detailId': 0, 'conditionId': conId, 'conditionS': conS};
+    var url=urlprefix+"/mocker/MockConditionSetting";
+    $.post(url,data,function (list1) {
         if(list1.indexOf("1")>-1){
             alert("修改失败！条件的格式必须为：A=B");
         }else if(list1.indexOf("2")>-1){
@@ -48,8 +64,9 @@ function deleteCondition(conIdList,i) {
     var msg = "确认删除？";
     if (confirm(msg) == true) {
         var conId = conIdList.get(i).replace("\"", "");
-        var url = urlprefix+"/mocker/MockConditionSetting/type=delete&detailId=0&conditionId=" + conId + "&conditionS=0";
-        $.get(url, function (list1) {
+        var data = {'type': "delete",'conditionId': conId};
+        var url=urlprefix+"/mocker/MockConditionSetting";
+        $.post(url, data,function (list1) {
             alert("提交成功！");
             window.close();
         })
@@ -70,8 +87,9 @@ function addCondition() {
     var locArray=loc1.split("&amp;");
     var detailId=locArray[0].split("=")[1];
     var conS=document.getElementById("mockCondition").value;
-    var url=urlprefix+"/mocker/MockConditionSetting/type=add&detailId="+detailId+"&conditionId=0&conditionS="+"\""+encodeURI(conS)+"\"";
-    $.get(url,function (list1) {
+    var data = {'type': "add", 'detailId': detailId,'conditionS': conS};
+    var url=urlprefix+"/mocker/MockConditionSetting";
+    $.post(url,data,function (list1) {
         if(list1.indexOf("1")>-1){
             alert("创建失败！条件的格式必须为：A=B");
         }else if(list1.indexOf("2")>-1){
@@ -98,7 +116,7 @@ function createDetailSubmit() {
 
     if(mockCaseName.length==0||mockResponseMsg.length==0||mock_timeout.length==0||mockCode.length==0){
         alert("必填项不能为空！");
-    }else if(!reg.test(callbackURL)){
+    }else if(callbackURL.length!=0&&!reg.test(callbackURL)){
         alert("url必须是以http://或https://开头的合法网址！");
     }else{
         var url = location.search; //获取url中"?"符后的字串

@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.junker.httpmock.data.FormData;
 import com.junker.httpmock.data.MockDetailData;
+import com.junker.httpmock.util.AbsolutePath;
 import com.junker.httpmock.util.PropertiesUtil;
 import com.junker.httpmock.util.SQLUtil;
 import org.apache.log4j.Logger;
@@ -36,9 +37,12 @@ public class SearchMockConfDAO {
 	private static String USER_SEARCH_BYID="";
 	private static PropertiesUtil pu = new PropertiesUtil();
 
+	public SearchMockConfDAO(){
+		AbsolutePath.getPath();
+	}
 
 	public HashMap<Integer,String> departmentSearch() throws SQLException, ClassNotFoundException {
-		DEPARTMENT_SEARCH = pu.getPropertiesValue("DEPARTMENT_SEARCH");
+		DEPARTMENT_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"DEPARTMENT_SEARCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(DEPARTMENT_SEARCH);
 		ResultSet rs = pstmt.executeQuery();
@@ -65,7 +69,7 @@ public class SearchMockConfDAO {
 
 
 	public HashMap<Integer,String> ServerSearch() throws SQLException, ClassNotFoundException {
-		SERVER_SEARCH = pu.getPropertiesValue("SERVER_SEARCH");
+		SERVER_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"SERVER_SEARCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(SERVER_SEARCH);
 		ResultSet rs = pstmt.executeQuery();
@@ -91,7 +95,7 @@ public class SearchMockConfDAO {
 	}
 
 	public HashMap<Integer,String> userSearch(String department) throws SQLException, ClassNotFoundException {
-		USER_SEARCH = pu.getPropertiesValue("USER_SEARCH");
+		USER_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"USER_SEARCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(USER_SEARCH);
 		pstmt.setString(1,department);
@@ -113,7 +117,7 @@ public class SearchMockConfDAO {
 	}
 
 	public HashMap<Integer,String> mockAPISearch(String servername) throws SQLException, ClassNotFoundException {
-		MOCKAPI_SEARCH = pu.getPropertiesValue("MOCKAPI_SEARCH");
+		MOCKAPI_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKAPI_SEARCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKAPI_SEARCH);
 		pstmt.setString(1,servername);
@@ -136,9 +140,9 @@ public class SearchMockConfDAO {
 
 	public HashMap<Integer, HashMap<String,String>> mockDetailsSearch(String server,String mockAPI_name,String department,String user) throws SQLException, ClassNotFoundException {
 		Connection con= SQLUtil.getConnection();
-		MOCKDETAIL_SEARCH = pu.getPropertiesValue("MOCKDETAIL_SEARCH");
-		MOCKDETAIL_FUZZYSEARCH = pu.getPropertiesValue("MOCKDETAIL_FUZZYSEARCH");
-		USER_SEARCH_BYID = pu.getPropertiesValue("USER_SEARCH_BYID");
+		MOCKDETAIL_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKDETAIL_SEARCH");
+		MOCKDETAIL_FUZZYSEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKDETAIL_FUZZYSEARCH");
+		USER_SEARCH_BYID = pu.getPropertiesValue(AbsolutePath.dbConfPath,"USER_SEARCH_BYID");
 		PreparedStatement pstmt = con.prepareStatement(MOCKDETAIL_SEARCH);
 		PreparedStatement pstmt2 = con.prepareStatement(MOCKDETAIL_FUZZYSEARCH);
 		PreparedStatement pstmt3 = con.prepareStatement(USER_SEARCH_BYID);
@@ -217,7 +221,7 @@ public class SearchMockConfDAO {
 	}
 
 	public HashMap<String,String>  mockConditionSearch(String mockDedatil_id) throws SQLException {
-		MOCKCONDITION_SEARCH = pu.getPropertiesValue("MOCKCONDITION_SEARCH");
+		MOCKCONDITION_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKCONDITION_SEARCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKCONDITION_SEARCH);
 		MockDetailData mdd=new MockDetailData();
@@ -236,7 +240,7 @@ public class SearchMockConfDAO {
 	}
 
 	public int mockConditionUpdate(String conditionId,String newCondition) throws SQLException {
-		MOCKCONDITION_UPDATE = pu.getPropertiesValue("MOCKCONDITION_UPDATE");
+		MOCKCONDITION_UPDATE = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKCONDITION_UPDATE");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKCONDITION_UPDATE);
 		pstmt.setString(1,newCondition);
@@ -248,7 +252,7 @@ public class SearchMockConfDAO {
 	}
 
 	public int mockConditionCreate(String detail_id,String newCondition) throws SQLException {
-		MOCKCONDITION_CREATE = pu.getPropertiesValue("MOCKCONDITION_CREATE");
+		MOCKCONDITION_CREATE = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKCONDITION_CREATE");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKCONDITION_CREATE);
 		if(newCondition.length()==0){
@@ -263,7 +267,7 @@ public class SearchMockConfDAO {
 	}
 
 	public int mockConditionDelete(String condition_id) throws SQLException {
-		MOCKCONDITION_DELETE = pu.getPropertiesValue("MOCKCONDITION_DELETE");
+		MOCKCONDITION_DELETE = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKCONDITION_DELETE");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKCONDITION_DELETE);
 		pstmt.setString(1,condition_id);
@@ -273,7 +277,7 @@ public class SearchMockConfDAO {
 		return result;
 	}
 	public int mockDetailCreate(String mockAPI_id,String mockType,String mockCaseName,String mock_timeout,String mockCode,String mockResponseMsg,String mockResponseHeader,String callbackURL,String callbackType,String callbackPara,String author_id) throws SQLException {
-		MOCKDETAIL_CREATE = pu.getPropertiesValue("MOCKDETAIL_CREATE");
+		MOCKDETAIL_CREATE = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKDETAIL_CREATE");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKDETAIL_CREATE);
 		pstmt.setString(1,mockAPI_id);
@@ -294,7 +298,7 @@ public class SearchMockConfDAO {
 	}
 
 	public int mockDetailUpdate(String mockType,String mockCaseName,String mock_timeout,String mockCode,String mockResponseMsg,String mockResponseHeader,String callbackURL,String callbackType,String callbackPara,String mockDetail_id) throws SQLException {
-		MOCKDETAIL_UPDATE = pu.getPropertiesValue("MOCKDETAIL_UPDATE");
+		MOCKDETAIL_UPDATE = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKDETAIL_UPDATE");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKDETAIL_UPDATE);
 		pstmt.setString(1,mockType);
@@ -314,8 +318,8 @@ public class SearchMockConfDAO {
 	}
 
 	public int mockDetailDelete(String mockDetail_id) throws SQLException {
-		MOCKDETAIL_DELETE = pu.getPropertiesValue("MOCKDETAIL_DELETE");
-		DETAILAUTHOR_SEARCH = pu.getPropertiesValue("DETAILAUTHOR_SEARCH");
+		MOCKDETAIL_DELETE = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKDETAIL_DELETE");
+		DETAILAUTHOR_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"DETAILAUTHOR_SEARCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt1 = con.prepareStatement(MOCKDETAIL_DELETE);
 		PreparedStatement pstmt2 = con.prepareStatement(DETAILAUTHOR_SEARCH);
@@ -344,7 +348,7 @@ public class SearchMockConfDAO {
 		System.out.println("mockAPI_name:"+mockAPI_name);
 		System.out.println("mockCondition:"+mockCondition);
 		ArrayList<String> matchList=new ArrayList<String>();
-		MOCKSETTING_MATCH = pu.getPropertiesValue("MOCKSETTING_MATCH");
+		MOCKSETTING_MATCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKSETTING_MATCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKSETTING_MATCH);
 		pstmt.setString(3,mockAPI_name);
@@ -397,7 +401,7 @@ public class SearchMockConfDAO {
 	}
 
 	public String mockAPIidSearch(String APIName) throws SQLException, ClassNotFoundException {
-		MOCKAPIID_SEARCH = pu.getPropertiesValue("MOCKAPIID_SEARCH");
+		MOCKAPIID_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKAPIID_SEARCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKAPIID_SEARCH);
 		String APIid="";
@@ -415,7 +419,7 @@ public class SearchMockConfDAO {
 	}
 
 	public String useridSearch(String name) throws SQLException, ClassNotFoundException {
-		USERID_SEARCH = pu.getPropertiesValue("USERID_SEARCH");
+		USERID_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"USERID_SEARCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(USERID_SEARCH);
 		String userid="";
@@ -433,7 +437,7 @@ public class SearchMockConfDAO {
 	}
 
 	public ArrayList<String> modkDetailIdSearch(String mockCondition) throws SQLException, ClassNotFoundException {
-		MOCKDETAILID_SEARCH = pu.getPropertiesValue("MOCKDETAILID_SEARCH");
+		MOCKDETAILID_SEARCH = pu.getPropertiesValue(AbsolutePath.dbConfPath,"MOCKDETAILID_SEARCH");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(MOCKDETAILID_SEARCH);
 		ArrayList<String> modkDetailId=new ArrayList<String>();
@@ -448,7 +452,7 @@ public class SearchMockConfDAO {
 		return modkDetailId;
 	}
 	public int authorCreate(String department,String username) throws SQLException, ClassNotFoundException {
-		AUTHORCREATE = pu.getPropertiesValue("AUTHORCREATE");
+		AUTHORCREATE = pu.getPropertiesValue(AbsolutePath.dbConfPath,"AUTHORCREATE");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(AUTHORCREATE);
 		ArrayList<String> modkDetailId=new ArrayList<String>();
@@ -461,7 +465,7 @@ public class SearchMockConfDAO {
 	}
 
 	public int APICreate(String mockServer_name,String mockAPI_name) throws SQLException, ClassNotFoundException {
-		APICREATE = pu.getPropertiesValue("APICREATE");
+		APICREATE = pu.getPropertiesValue(AbsolutePath.dbConfPath,"APICREATE");
 		Connection con = SQLUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(APICREATE);
 		ArrayList<String> modkDetailId=new ArrayList<String>();

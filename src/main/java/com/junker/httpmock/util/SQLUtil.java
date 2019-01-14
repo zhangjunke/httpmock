@@ -1,5 +1,7 @@
 package com.junker.httpmock.util;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -7,11 +9,18 @@ import java.sql.DriverManager;
 import java.util.Properties;
 
 public class SQLUtil {
-    private static final String dbconfig = "/Properties/mysql.properties";
     private static Properties prop = new Properties();
     static {
+        String os = System.getProperty("os.name");
+        String classPath = System.getProperty("user.dir");
+        String dbConfPath="";
+        if(os.toLowerCase().startsWith("win")){
+            dbConfPath = classPath+"\\src\\main\\webapp\\Properties\\mysql.properties";
+        }else{
+            dbConfPath = classPath+"/src/main/webapp/Properties/mysql.properties";
+        }
         try {
-            InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(dbconfig);
+            InputStream in = new BufferedInputStream(new FileInputStream(dbConfPath));
             prop.load(in);
             Class.forName(prop.getProperty("driverClassName"));
         } catch(IOException e) {
