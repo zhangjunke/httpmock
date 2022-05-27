@@ -4,7 +4,7 @@
   <groupId>com.junker</groupId>
   <artifactId>httpmock</artifactId>
   <packaging>war</packaging>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <name>httpmock Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
