@@ -5,7 +5,7 @@
   <artifactId>httpmock</artifactId>
   <packaging>war</packaging>
   <version>1.0.3</version>
-  <name>httpmock Maven Webapp</name>
+  <name>httpmock b1 commit1</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
